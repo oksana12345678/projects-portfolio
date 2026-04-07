@@ -26,6 +26,6 @@ export const ScrollAnimation = styled.div`
   }
 
   @media screen and (min-width: 1440px) {
-    bottom: 2%;
+    bottom: 25%;
   }
 `;
