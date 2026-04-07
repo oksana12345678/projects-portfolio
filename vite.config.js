@@ -1,0 +1,24 @@
+// import { defineConfig } from 'vite'
+// import react from '@vitejs/plugin-react'
+
+// // https://vite.dev/config/
+// export default defineConfig({
+//   plugins: [react()],
+// })
+
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import path from "path";
+
+export default defineConfig({
+  plugins: [react()],
+  optimizeDeps: {
+    exclude: ["tech-stack-icons"],
+  },
+  resolve: {
+    alias: {
+      "@": path.resolve("src"),
+      "modern-normalize": path.resolve("node_modules/modern-normalize"),
+    },
+  },
+});
