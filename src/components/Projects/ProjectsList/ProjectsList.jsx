@@ -23,6 +23,7 @@ import ModalWindow from "../../../shared/components/ModalWindow/ModalWindow";
 import OpenProjectCard from "../ProjectsCard/components/OpenProjectCard/OpenProjectCard";
 import { Observer } from "gsap/all";
 import { PROJECTS_KEYS } from "../../../shared/constants";
+import Scroll from "../../Scroll/Scroll";
 
 gsap.registerPlugin(Observer);
 const ProjectsList = ({ t }) => {
@@ -34,6 +35,7 @@ const ProjectsList = ({ t }) => {
   const sectionRef = useRef(null);
   const titleRefs = useRef([]);
   const observerRef = useRef(null);
+  const [arrowDown, setArrowDown] = useState(true);
 
   const imageNames = [
     inHArmony,
@@ -116,6 +118,7 @@ const ProjectsList = ({ t }) => {
       onDown: (self) => {
         if (indexRef.current === 0) {
           self.disable();
+          setArrowDown(true);
           return;
         }
         gotoCard(indexRef.current - 1, -1);
@@ -124,6 +127,7 @@ const ProjectsList = ({ t }) => {
       onUp: (self) => {
         if (indexRef.current === cardsRef.current.length - 1) {
           self.disable();
+          setArrowDown(false);
           return;
         }
         gotoCard(indexRef.current + 1, 1);
@@ -173,6 +177,8 @@ const ProjectsList = ({ t }) => {
           );
         })}
       </SwiperItem>
+      <Scroll arrowDown={arrowDown} />
+
       <ModalWindow isOpen={isOpen} openToggle={handleClickToggle}>
         {PROJECTS_KEYS.map((key, index) => {
           const project = t(key, { returnObjects: true });
